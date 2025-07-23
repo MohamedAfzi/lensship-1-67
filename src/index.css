@@ -1,0 +1,489 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Dark theme by default to match the mobile app */
+    --background: 0 0% 0%;
+    --foreground: 0 0% 95%;
+
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 198 100% 47%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 7%;
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 0 0% 7%;
+    --muted-foreground: 0 0% 60%;
+
+    --accent: 0 0% 7%;
+    --accent-foreground: 0 0% 95%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 95%;
+
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 198 100% 47%;
+
+    --radius: 0.5rem;
+
+    /* Mobile app specific colors */
+    --mobile-header: 0 0% 0%;
+    --mobile-surface: 0 0% 7%;
+    --mobile-text-primary: 0 0% 95%;
+    --mobile-text-secondary: 0 0% 70%;
+    --mobile-border: 0 0% 15%;
+
+    /* Neon color palette - Blue focused */
+    --neon-blue: 198 100% 47%;
+    --neon-pink: 320 100% 50%;
+    --neon-green: 152 100% 50%;
+    --neon-purple: 267 100% 50%;
+    --neon-cyan: 180 100% 50%;
+    --neon-orange: 25 100% 50%;
+    --neon-yellow: 60 100% 50%;
+    
+    /* Gradients - Blue focused */
+    --gradient-neon: linear-gradient(135deg, hsl(var(--neon-blue)), hsl(var(--neon-blue) / 0.8));
+    --gradient-cyber: linear-gradient(135deg, hsl(var(--neon-blue)), hsl(var(--neon-blue) / 0.6));
+    --gradient-electric: linear-gradient(135deg, hsl(var(--neon-blue) / 0.8), hsl(var(--neon-blue)));
+    
+    /* Shadows - Blue focused */
+    --glow-blue: 0 0 20px hsl(var(--neon-blue) / 0.5);
+    --glow-pink: 0 0 20px hsl(var(--neon-pink) / 0.5);
+    --glow-green: 0 0 20px hsl(var(--neon-green) / 0.5);
+  }
+
+  .light {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* Improved mobile scrolling */
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Better touch targets for mobile */
+  button, [role="button"], input, select, textarea {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  @media (max-width: 768px) {
+    button, [role="button"] {
+      min-height: 48px;
+    }
+  }
+}
+
+/* Neon animations */
+@keyframes neon-pulse {
+  0%, 100% { box-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor; }
+  50% { box-shadow: 0 0 20px currentColor, 0 0 30px currentColor, 0 0 40px currentColor; }
+}
+
+@keyframes neon-glow {
+  0%, 100% { filter: brightness(1) drop-shadow(0 0 10px currentColor); }
+  50% { filter: brightness(1.2) drop-shadow(0 0 20px currentColor); }
+}
+
+@keyframes slide-in-up {
+  from { transform: translateY(40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slide-in-left {
+  from { transform: translateX(-40px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slide-in-right {
+  from { transform: translateX(40px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes stagger-in {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes scan-line {
+  0% { transform: translateY(-100%); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+@keyframes type-writer {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink {
+  0%, 50% { border-color: transparent; }
+  51%, 100% { border-color: currentColor; }
+}
+
+@keyframes particle-drift {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(30px, -30px) rotate(120deg); }
+  66% { transform: translate(-20px, 20px) rotate(240deg); }
+  100% { transform: translate(0, 0) rotate(360deg); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { 
+    box-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor;
+    filter: brightness(1);
+  }
+  50% { 
+    box-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
+    filter: brightness(1.3);
+  }
+}
+
+/* Responsive Animations - Reduced motion on mobile */
+@keyframes glass-pulse {
+  0%, 100% { 
+    box-shadow: 0 0 8px hsl(var(--neon-blue) / 0.3);
+    border-color: hsl(var(--neon-blue) / 0.3);
+  }
+  50% { 
+    box-shadow: 0 0 16px hsl(var(--neon-blue) / 0.6);
+    border-color: hsl(var(--neon-blue) / 0.6);
+  }
+}
+
+@keyframes glass-float {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-8px) scale(1.02); }
+}
+
+@keyframes glass-entrance {
+  0% { 
+    opacity: 0;
+    backdrop-filter: blur(0px);
+    background: rgba(30, 30, 30, 0.1);
+    transform: translateY(20px);
+  }
+  100% { 
+    opacity: 1;
+    backdrop-filter: blur(16px);
+    background: rgba(30, 30, 30, 0.3);
+    transform: translateY(0);
+  }
+}
+
+@keyframes blur-in {
+  0% { backdrop-filter: blur(4px); }
+  100% { backdrop-filter: blur(12px); }
+}
+
+@keyframes blur-out {
+  0% { backdrop-filter: blur(12px); }
+  100% { backdrop-filter: blur(4px); }
+}
+
+@keyframes layered-rise {
+  0% { 
+    transform: translateY(40px) rotateX(20deg);
+    opacity: 0;
+  }
+  100% { 
+    transform: translateY(0) rotateX(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes parallax-float {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  25% { transform: translate3d(-10px, -5px, 0); }
+  50% { transform: translate3d(0, -10px, 0); }
+  75% { transform: translate3d(10px, -5px, 0); }
+}
+
+@keyframes enhanced-typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes rotate-stats {
+  0%, 20% { opacity: 1; transform: translateY(0); }
+  25%, 95% { opacity: 0; transform: translateY(-20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile-first animation classes */
+.neon-pulse { animation: neon-pulse 2s infinite; }
+.neon-glow { animation: neon-glow 2s infinite; }
+.slide-in-up { animation: slide-in-up 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+.slide-in-left { animation: slide-in-left 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+.slide-in-right { animation: slide-in-right 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+.stagger-in { animation: stagger-in 0.6s cubic-bezier(0.4, 0, 0.2, 1) both; }
+.float { animation: float 3s ease-in-out infinite; }
+.scan-line { animation: scan-line 2s linear infinite; }
+
+/* Advanced Glassmorphism Utilities with responsive variants */
+.animate-glass-pulse { animation: glass-pulse 2s ease-in-out infinite; }
+.animate-glass-float { animation: glass-float 3s ease-in-out infinite; }
+.animate-glass-entrance { animation: glass-entrance 0.8s cubic-bezier(0.4, 0, 0.2, 1) both; }
+.animate-blur-in { animation: blur-in 0.3s ease-out forwards; }
+.animate-blur-out { animation: blur-out 0.3s ease-out forwards; }
+.animate-layered-rise { animation: layered-rise 0.8s cubic-bezier(0.4, 0, 0.2, 1) both; }
+.animate-parallax-float { animation: parallax-float 6s ease-in-out infinite; }
+
+/* Hardware acceleration for smooth animations */
+.gpu-accelerated {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Enhanced fade animation for mobile menus */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.2s ease-out;
+}
+
+/* 3D Transform Utilities */
+.transform-gpu {
+  transform: translate3d(0, 0, 0);
+}
+
+.translate-z-4 {
+  transform: translateZ(4px);
+}
+
+.translate-z-8 {
+  transform: translateZ(8px);
+}
+
+.translate-z-12 {
+  transform: translateZ(12px);
+}
+
+.translate-z-16 {
+  transform: translateZ(16px);
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.perspective-800 {
+  perspective: 800px;
+}
+
+.perspective-600 {
+  perspective: 600px;
+}
+
+.transform-style-preserve-3d {
+  transform-style: preserve-3d;
+}
+
+/* Layered depth effects */
+.glass-layer-1 { z-index: 10; }
+.glass-layer-2 { z-index: 20; }
+.glass-layer-3 { z-index: 30; }
+
+/* Glass Stack Utilities */
+.glass-stack > * + * {
+  margin-top: -8px;
+}
+
+.glass-stack-reset {
+  margin-top: 0;
+}
+
+.glass-stack-reset > * + * {
+  margin-top: 0;
+}
+
+/* Responsive glass overlaps and optimizations */
+@media (max-width: 768px) {
+  .glass-stack > * + * {
+    margin-top: -12px;
+  }
+  
+  .glass-navigation {
+    backdrop-blur: 8px;
+  }
+  
+  .mobile-optimized {
+    padding: 1rem;
+  }
+  
+  .glass-hover-mobile:hover {
+    transform: scale(1.02);
+  }
+
+  /* Reduce animation intensity on mobile */
+  .animate-glass-float,
+  .animate-parallax-float {
+    animation-duration: 4s;
+  }
+
+  /* Optimize glass effects for mobile */
+  .backdrop-blur-md {
+    backdrop-filter: blur(8px);
+  }
+
+  .backdrop-blur-lg {
+    backdrop-filter: blur(12px);
+  }
+
+  /* Better touch interactions */
+  button:active,
+  [role="button"]:active {
+    transform: scale(0.98);
+  }
+}
+
+/* Enhanced focus states for accessibility */
+.focus-ring {
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neon-blue/80 focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+}
+
+/* Advanced accordion animations */
+@keyframes accordion-expand {
+  0% { 
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  100% { 
+    max-height: 400px;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes accordion-collapse {
+  0% { 
+    max-height: 400px;
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% { 
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes icon-morph {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(90deg) scale(0.8); }
+  100% { transform: rotate(180deg) scale(1); }
+}
+
+@keyframes search-pulse {
+  0%, 100% { 
+    box-shadow: 0 0 0 0 hsl(var(--neon-blue) / 0.4);
+    border-color: hsl(var(--border));
+  }
+  50% { 
+    box-shadow: 0 0 0 8px hsl(var(--neon-blue) / 0);
+    border-color: hsl(var(--neon-blue) / 0.5);
+  }
+}
+
+.animate-accordion-expand { animation: accordion-expand 0.3s ease-out forwards; }
+.animate-accordion-collapse { animation: accordion-collapse 0.3s ease-out forwards; }
+.animate-icon-morph { animation: icon-morph 0.3s ease-out; }
+.animate-search-pulse { animation: search-pulse 2s ease-in-out infinite; }
+
+/* Performance optimizations */
+.will-change-transform {
+  will-change: transform;
+}
+
+.will-change-auto {
+  will-change: auto;
+}
+
+/* Responsive container queries for advanced layouts */
+@container (min-width: 768px) {
+  .container-md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@container (min-width: 1024px) {
+  .container-lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Smooth scrolling improvements */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .glass-card {
+    border-width: 2px;
+    background-color: hsl(var(--card));
+  }
+}
